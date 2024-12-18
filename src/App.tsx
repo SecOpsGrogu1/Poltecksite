@@ -6,8 +6,8 @@ import ProductsPage from './pages/ProductsPage'
 import DocumentationPage from './pages/DocumentationPage'
 import CareersPage from './pages/CareersPage'
 import CompanyPage from './pages/CompanyPage'
-import BlogPage from './pages/BlogPage';
-import BlogPostPage from './pages/BlogPostPage';
+import NewsPage from './pages/NewsPage';
+import NewsArticlePage from './pages/NewsArticlePage';
 
 function App() {
   return (
@@ -21,8 +21,8 @@ function App() {
             <Route path="/docs" element={<DocumentationPage />} />
             <Route path="/careers" element={<CareersPage />} />
             <Route path="/company" element={<CompanyPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:id" element={<BlogPostPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/news/:id" element={<NewsArticlePage />} />
           </Routes>
         </main>
         <Footer />

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import { CalendarIcon, ClockIcon, UserIcon } from '@heroicons/react/24/outline';
 
-interface BlogPost {
+interface NewsArticle {
   id: string;
   title: string;
   content: string;
@@ -13,8 +13,8 @@ interface BlogPost {
   imageUrl: string;
 }
 
-// Sample blog post data (replace with your actual blog posts)
-const blogPosts: Record<string, BlogPost> = {
+// Sample news article data (replace with your actual news articles)
+const newsArticles: Record<string, NewsArticle> = {
   '1': {
     id: '1',
     title: 'Optimizing Cloud Costs: A Comprehensive Guide',
@@ -43,19 +43,19 @@ const blogPosts: Record<string, BlogPost> = {
     author: 'John Doe',
     readTime: '5 min read',
     category: 'Cloud Engineering',
-    imageUrl: '/blog/cloud-costs.jpg',
+    imageUrl: '/news/cloud-costs.jpg',
   },
-  // Add more blog posts here
+  // Add more news articles here
 };
 
-export default function BlogPostPage() {
+export default function NewsArticlePage() {
   const { id } = useParams<{ id: string }>();
-  const post = id ? blogPosts[id] : null;
+  const article = id ? newsArticles[id] : null;
 
-  if (!post) {
+  if (!article) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-600">Blog post not found</p>
+        <p className="text-xl text-gray-600">Article not found</p>
       </div>
     );
   }
@@ -65,22 +65,22 @@ export default function BlogPostPage() {
       <article className="mx-auto max-w-3xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <div className="mt-8 flex justify-center gap-x-4 text-xs">
-            <time dateTime={post.date} className="text-gray-500">
-              {format(new Date(post.date), 'MMMM d, yyyy')}
+            <time dateTime={article.date} className="text-gray-500">
+              {format(new Date(article.date), 'MMMM d, yyyy')}
             </time>
             <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
-              {post.category}
+              {article.category}
             </span>
           </div>
           <h1 className="mt-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            {post.title}
+            {article.title}
           </h1>
         </div>
 
         <div className="mx-auto mt-8 max-w-2xl">
           <div className="relative w-full">
             <img
-              src={post.imageUrl || `https://picsum.photos/800/400?random=${post.id}`}
+              src={article.imageUrl || `https://picsum.photos/800/400?random=${article.id}`}
               alt=""
               className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover"
             />
@@ -89,20 +89,20 @@ export default function BlogPostPage() {
 
           <div className="mt-8 flex items-center gap-x-4 border-b border-gray-900/10 pb-8">
             <img
-              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(post.author)}&background=random`}
+              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(article.author)}&background=random`}
               alt=""
               className="h-10 w-10 rounded-full bg-gray-100"
             />
             <div className="text-sm leading-6">
-              <p className="font-semibold text-gray-900">{post.author}</p>
+              <p className="font-semibold text-gray-900">{article.author}</p>
               <div className="flex items-center gap-x-4 text-gray-600">
                 <span className="flex items-center gap-x-1">
                   <CalendarIcon className="h-4 w-4" />
-                  {format(new Date(post.date), 'MMM d, yyyy')}
+                  {format(new Date(article.date), 'MMM d, yyyy')}
                 </span>
                 <span className="flex items-center gap-x-1">
                   <ClockIcon className="h-4 w-4" />
-                  {post.readTime}
+                  {article.readTime}
                 </span>
               </div>
             </div>
@@ -110,7 +110,7 @@ export default function BlogPostPage() {
 
           <div 
             className="prose prose-lg prose-indigo mt-10 max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: article.content }}
           />
         </div>
       </article>

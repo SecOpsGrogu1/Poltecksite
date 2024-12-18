@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { BanknotesIcon, ChatBubbleLeftRightIcon, CogIcon, CommandLineIcon, ShieldCheckIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
+import '../styles/animations.css';
 
 const features = [
   {
@@ -228,29 +229,37 @@ export default function HomePage() {
             <p className="text-base text-gray-600 mb-8">
               Deep expertise across major cloud platforms
             </p>
-            <div className="mt-8 flex justify-center items-center space-x-12">
+            <div className="mt-8 flex justify-center items-center space-x-16">
               {[
-                { name: 'AWS', logo: '/aws-logo.svg', color: '#FF9900' },
-                { name: 'Google Cloud', logo: '/gcp-logo.svg', color: '#4285F4' },
-                { name: 'Azure', logo: '/azure-logo.svg', color: '#0089D6' }
+                { name: 'AWS', color: '#FF9900' },
+                { name: 'Google Cloud', color: '#4285F4' },
+                { name: 'Azure', color: '#0089D6' }
               ].map((provider) => (
-                <motion.div
+                <div
                   key={provider.name}
-                  whileHover={{ scale: 1.05 }}
-                  className="flex flex-col items-center"
+                  className="group relative cursor-pointer transition-all duration-300 hover:scale-105"
                 >
                   <div 
-                    className="w-24 h-24 mb-3 flex items-center justify-center rounded-xl shadow-lg"
-                    style={{ backgroundColor: `${provider.color}10` }}
-                  >
-                    <img
-                      src={provider.logo}
-                      alt={provider.name}
-                      className="h-14 w-14"
-                    />
+                    className="absolute -inset-0.5 rounded-lg opacity-75 transition-all duration-300 group-hover:opacity-100"
+                    style={{ 
+                      backgroundImage: `linear-gradient(45deg, ${provider.color}, #ffffff, ${provider.color})`,
+                      animation: 'gradient 3s ease infinite',
+                      filter: 'blur(2px)'
+                    }}
+                  />
+                  <div className="relative rounded-lg bg-white bg-opacity-90 px-6 py-3">
+                    <span 
+                      className="text-3xl font-bold tracking-wide"
+                      style={{ 
+                        color: provider.color,
+                        textShadow: `0 0 1px ${provider.color}`,
+                        animation: 'pulse 2s ease-in-out infinite'
+                      }}
+                    >
+                      {provider.name}
+                    </span>
                   </div>
-                  <span className="text-lg font-semibold text-gray-900">{provider.name}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

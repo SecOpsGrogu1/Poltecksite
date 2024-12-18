@@ -53,7 +53,11 @@ const navigation = [
       },
     ],
   },
-  { name: 'Blog', href: '/blog', icon: DocumentTextIcon },
+  { 
+    name: 'News',
+    href: '/news',
+    icon: DocumentTextIcon,
+  },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
